@@ -5,7 +5,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { BALLDONTLIE_API_KEY, SEASON, TEAMS, TOP_GAMES_PER_ROOKIE } = require("../config.js");
+const { BALLDONTLIE_API_KEY, SEASON, TEAMS } = require("../config.js");
 
 const API_BASE = "https://api.balldontlie.io/v1";
 const MIN_GAP_MS = 13000; // ~4.6 req/min, under the 5/min free-tier cap
@@ -49,15 +49,16 @@ async function fetchSeasonGames(playerId) {
     const { data, meta } = await api(q);
     for (const g of data) {
       if (g.min === null || g.min === "00" || g.min === "0") continue;
-      games.push((g.pts || 0) + (g.reb || 0) + (g.ast || 0));
+      games.push({
+        date: g.game && g.game.date ? g.game.date.slice(0, 10) : "",
+        opp: "", min: parseInt(g.min, 10) || 0,
+        pts: g.pts || 0, reb: g.reb || 0, ast: g.ast || 0, stl: g.stl || 0, blk: g.blk || 0, tov: g.turnover || 0,
+        fgm: g.fgm || 0, fga: g.fga || 0, fg3m: g.fg3m || 0, fg3a: g.fg3a || 0, ftm: g.ftm || 0, fta: g.fta || 0,
+      });
     }
     cursor = meta && meta.next_cursor ? meta.next_cursor : null;
   } while (cursor);
   return games;
-}
-
-function rookieScore(praGames) {
-  return [...praGames].sort((a, b) => b - a).slice(0, TOP_GAMES_PER_ROOKIE).reduce((s, v) => s + v, 0);
 }
 
 (async () => {
@@ -70,15 +71,15 @@ function rookieScore(praGames) {
         const id = await findPlayerId(r.name);
         if (id === null) {
           console.log("not in league yet");
-          rookies.push({ display: r.display, name: r.name, score: 0, gp: 0, notFound: true });
+          rookies.push({ display: r.display, name: r.name, games: [], notFound: true });
         } else {
           const games = await fetchSeasonGames(id);
-          console.log(`${games.length} games, ${rookieScore(games)} PRA`);
-          rookies.push({ display: r.display, name: r.name, score: rookieScore(games), gp: games.length });
+          console.log(`${games.length} games`);
+          rookies.push({ display: r.display, name: r.name, games });
         }
       } catch (e) {
         console.log(`error: ${e.message}`);
-        rookies.push({ display: r.display, name: r.name, score: 0, gp: 0, error: true });
+        rookies.push({ display: r.display, name: r.name, games: [], error: true });
       }
     }
     out.push({ owner: team.owner, color: team.color, rookies });

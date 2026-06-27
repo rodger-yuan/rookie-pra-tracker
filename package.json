@@ -1,0 +1,6 @@
+{
+  "name": "rookie-pra-tracker",
+  "private": true,
+  "type": "commonjs",
+  "description": "Static GitHub Pages site; scripts/ run under Node (CommonJS)."
+}

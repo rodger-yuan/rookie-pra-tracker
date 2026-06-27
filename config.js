@@ -8,6 +8,10 @@ const BALLDONTLIE_API_KEY = "598e95a1-7fcc-4086-809d-9da43f8162be";
 // The NBA season to track. "2026" = the 2026–27 season.
 const SEASON = 2026;
 
+// DEMO_MODE loads dummy-data.json so you can preview the UI before the season
+// starts. Set to false to use the real nightly data.json.
+const DEMO_MODE = true;
+
 // Rosters. `name` is what's searched on balldontlie — match the NBA spelling.
 // `display` is what's shown on the page.
 const TEAMS = [
@@ -43,5 +47,5 @@ const ROOKIES_COUNTED = 5;       // best M of 6 rookies count per team
 
 // Make this file importable by the nightly Node fetch script too.
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { BALLDONTLIE_API_KEY, SEASON, TEAMS, TOP_GAMES_PER_ROOKIE, ROOKIES_COUNTED };
+  module.exports = { BALLDONTLIE_API_KEY, SEASON, DEMO_MODE, TEAMS, TOP_GAMES_PER_ROOKIE, ROOKIES_COUNTED };
 }

@@ -37,7 +37,7 @@ body {
 #refreshBtn:disabled { opacity: 0.5; cursor: default; }
 .status { color: var(--muted); font-size: 0.85rem; }
 
-main { max-width: 980px; margin: 0 auto; padding: 16px; }
+main { max-width: 1180px; margin: 0 auto; padding: 16px; }
 
 /* Scoreboard */
 .scoreboard {
@@ -58,31 +58,74 @@ main { max-width: 980px; margin: 0 auto; padding: 16px; }
 .team-card .label { color: var(--muted); font-size: 0.8rem; }
 
 /* Teams */
-.teams { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.teams { display: flex; flex-direction: column; gap: 16px; }
 .team-block {
   background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
   padding: 16px 18px;
 }
 .team-block h2 {
-  margin: 0 0 10px; font-size: 1.05rem;
+  margin: 0 0 12px; font-size: 1.05rem;
   border-left: 4px solid var(--accent); padding-left: 10px;
+  display: flex; align-items: baseline; gap: 10px;
 }
-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
-th { color: var(--muted); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
-.rk-gp, .rk-score, td:nth-child(2), td:nth-child(3),
-th:nth-child(2), th:nth-child(3) { text-align: right; font-variant-numeric: tabular-nums; }
-.rk-score { font-weight: 700; }
-tr.dropped { opacity: 0.45; }
+.team-sum { color: var(--accent); font-weight: 800; font-size: 0.95rem; }
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 0.86rem; white-space: nowrap; }
+th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); }
+th {
+  color: var(--muted); font-weight: 600; font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.4px; position: sticky; top: 0;
+  background: var(--panel);
+}
+td.num, th { font-variant-numeric: tabular-nums; }
+td.num { text-align: right; }
+table thead th.num, table tbody td.num { text-align: right; }
+th:not(.sticky-col), td:not(.sticky-col):not(.rk-name) { text-align: right; }
+.strong { font-weight: 800; }
+.grp { border-left: 2px solid var(--line); }
+td.grp.strong { color: var(--accent); }
+
+/* sticky player column */
+.sticky-col {
+  position: sticky; left: 0; z-index: 2; text-align: left !important;
+  background: var(--panel); min-width: 150px;
+}
+th.sticky-col { z-index: 3; }
+tr.clickable { cursor: pointer; }
+tr.clickable:hover td { background: var(--panel-2); }
+tr.clickable:hover .sticky-col { background: #232833; }
+tr.dropped { opacity: 0.5; }
 tr.dropped .rk-name { text-decoration: line-through; }
-tfoot td { font-weight: 700; border-bottom: none; border-top: 2px solid var(--line); }
 
 .tag {
-  font-size: 0.68rem; color: var(--muted); background: var(--panel-2);
-  border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; margin-left: 4px;
+  font-size: 0.66rem; color: var(--muted); background: var(--panel-2);
+  border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px;
   white-space: nowrap;
 }
+.tag.ok { color: #69db7c; border-color: #2b5a35; }
+.tag.drop { color: #ffa94d; border-color: #6a4a22; }
 .tag.err { color: #ff8787; border-color: #5a2a2a; }
+
+/* Modal */
+.modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50;
+}
+.modal.open { display: flex; }
+.modal-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  max-width: 760px; width: 100%; max-height: 86vh; overflow: auto; padding: 18px 20px;
+}
+.modal-head { display: flex; align-items: center; justify-content: space-between; }
+.modal-head h3 { margin: 0; }
+.modal-head .muted, .modal .muted { color: var(--muted); font-weight: 400; }
+.modal-sub { color: var(--muted); font-size: 0.82rem; margin: 6px 0 14px; }
+.modal .close {
+  background: var(--panel-2); color: var(--text); border: 1px solid var(--line);
+  border-radius: 8px; width: 30px; height: 30px; cursor: pointer; font-size: 0.9rem;
+}
+table.games th { background: var(--panel); }
 
 /* Rules */
 .rules {

@@ -1,0 +1,35 @@
+name: Update rookie stats
+
+on:
+  schedule:
+    # 09:00 UTC nightly = ~1-2 AM Pacific / 4-5 AM Eastern.
+    - cron: "0 9 * * *"
+  workflow_dispatch: {} # allows manual "Run workflow" from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch latest stats
+        run: node scripts/fetch-stats.js
+
+      - name: Commit data.json if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data.json; then
+            echo "No changes."
+          else
+            git add data.json
+            git commit -m "Update rookie stats ($(date -u +%Y-%m-%d))"
+            git push
+          fi

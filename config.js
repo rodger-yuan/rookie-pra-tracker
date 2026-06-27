@@ -40,3 +40,8 @@ const TEAMS = [
 // Scoring knobs
 const TOP_GAMES_PER_ROOKIE = 50; // count each rookie's best N games
 const ROOKIES_COUNTED = 5;       // best M of 6 rookies count per team
+
+// Make this file importable by the nightly Node fetch script too.
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { BALLDONTLIE_API_KEY, SEASON, TEAMS, TOP_GAMES_PER_ROOKIE, ROOKIES_COUNTED };
+}

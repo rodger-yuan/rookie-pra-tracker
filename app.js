@@ -207,13 +207,34 @@ function render(data) {
     .join("");
 }
 
+// Prebuilt nightly snapshot (committed by the GitHub Action). Instant, no API calls.
+async function loadStatic() {
+  try {
+    const res = await fetch(`data.json?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) return null;
+    const j = await res.json();
+    if (!j || !Array.isArray(j.teams) || !j.teams.length) return null;
+    return j;
+  } catch { return null; }
+}
+
 // ── Boot ─────────────────────────────────────────────────────────
 async function run({ force = false } = {}) {
   document.getElementById("refreshBtn").disabled = true;
   try {
+    // Force = bypass the snapshot and pull live from the API.
+    if (!force) {
+      const snap = await loadStatic();
+      if (snap) {
+        render(snap.teams);
+        const when = new Date(snap.updated).toLocaleString();
+        setStatus(`Auto-updated nightly · last run ${when}`);
+        return;
+      }
+    }
     const data = await loadData({ force });
     render(data);
-    setStatus(`Updated ${new Date().toLocaleString()}`);
+    setStatus(`Updated ${new Date().toLocaleString()} (live)`);
   } catch (e) {
     if (e.partial) render(e.partial); // show whatever completed before the limit
     setStatus(`⚠️ ${e.message}`);

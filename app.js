@@ -10,17 +10,43 @@ const teamsEl = document.getElementById("teams");
 
 function setStatus(msg) { statusEl.textContent = msg; }
 
-// ── API helpers ──────────────────────────────────────────────────
-async function api(path) {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: { Authorization: BALLDONTLIE_API_KEY },
-  });
-  if (res.status === 429) throw new Error("Rate limited — wait a minute and refresh.");
-  if (!res.ok) throw new Error(`API ${res.status} on ${path}`);
-  return res.json();
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// ── Throttled API ────────────────────────────────────────────────
+// balldontlie free tier is ~5 requests/min. Serialize every call through a
+// single chain with a minimum gap, and back off + retry on a 429.
+const MIN_GAP_MS = 13000; // ~4.6 req/min, safely under the free-tier limit
+let _chain = Promise.resolve();
+let _lastReq = 0;
+
+async function rawApi(path) {
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const res = await fetch(`${API_BASE}${path}`, {
+      headers: { Authorization: BALLDONTLIE_API_KEY },
+    });
+    if (res.status === 429) {
+      const retryAfter = parseInt(res.headers.get("Retry-After"), 10);
+      const wait = (Number.isFinite(retryAfter) ? retryAfter : 15 * (attempt + 1)) * 1000;
+      setStatus(`Rate limited — waiting ${Math.round(wait / 1000)}s before retrying…`);
+      await sleep(wait);
+      continue;
+    }
+    if (!res.ok) throw new Error(`API ${res.status} on ${path}`);
+    return res.json();
+  }
+  throw new Error("Still rate limited after several retries — try again in a few minutes.");
 }
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Gate all requests so they're spaced at least MIN_GAP_MS apart.
+function api(path) {
+  _chain = _chain.then(async () => {
+    const wait = Math.max(0, MIN_GAP_MS - (Date.now() - _lastReq));
+    if (wait) await sleep(wait);
+    try { return await rawApi(path); }
+    finally { _lastReq = Date.now(); }
+  });
+  return _chain;
+}
 
 // Find a player's balldontlie id by name. Returns null if not in the league yet.
 async function findPlayerId(name) {
@@ -46,7 +72,6 @@ async function fetchSeasonGames(playerId) {
       games.push((g.pts || 0) + (g.reb || 0) + (g.ast || 0));
     }
     cursor = meta && meta.next_cursor ? meta.next_cursor : null;
-    if (cursor) await sleep(250);
   } while (cursor);
   return games;
 }
@@ -57,55 +82,72 @@ function rookieScore(praGames) {
   return sorted.reduce((s, v) => s + v, 0);
 }
 
-// ── Data orchestration (with caching) ────────────────────────────
-async function loadData({ force = false } = {}) {
-  if (!force) {
-    const cached = readCache();
-    if (cached) return cached;
-  }
+// ── Data orchestration (per-rookie caching) ──────────────────────
+function rookieCacheKey(r) { return `${CACHE_KEY}-r-${r.name}`; }
 
+function readRookieCache(r) {
+  try {
+    const raw = localStorage.getItem(rookieCacheKey(r));
+    if (!raw) return null;
+    const { ts, rookie } = JSON.parse(raw);
+    if (Date.now() - ts > CACHE_TTL_MS) return null;
+    return rookie;
+  } catch { return null; }
+}
+function writeRookieCache(r, rookie) {
+  try { localStorage.setItem(rookieCacheKey(r), JSON.stringify({ ts: Date.now(), rookie })); } catch {}
+}
+
+// Count how many rookies still need a network fetch (for progress display).
+function pendingCount(force) {
+  let n = 0;
+  for (const team of TEAMS)
+    for (const r of team.roster)
+      if (force || !readRookieCache(r)) n++;
+  return n;
+}
+
+async function loadData({ force = false } = {}) {
   if (!BALLDONTLIE_API_KEY || BALLDONTLIE_API_KEY === "PASTE_YOUR_FREE_KEY_HERE") {
     throw new Error("No API key set — edit config.js and add your free balldontlie key.");
   }
+
+  const remaining = pendingCount(force);
+  let done = 0;
+  const eta = () => remaining ? ` (~${Math.ceil((remaining - done) * MIN_GAP_MS / 1000)}s left)` : "";
 
   const result = [];
   for (const team of TEAMS) {
     const rookies = [];
     for (const r of team.roster) {
-      setStatus(`Fetching ${r.display}…`);
+      const cached = !force && readRookieCache(r);
+      if (cached) { rookies.push(cached); continue; }
+
+      setStatus(`Fetching ${r.display}…${eta()}`);
+      let rookie;
       try {
         const id = await findPlayerId(r.name);
-        await sleep(250);
         if (id === null) {
-          rookies.push({ ...r, score: 0, gp: 0, notFound: true });
-          continue;
+          rookie = { ...r, score: 0, gp: 0, notFound: true };
+        } else {
+          const games = await fetchSeasonGames(id);
+          rookie = { ...r, score: rookieScore(games), gp: games.length };
         }
-        const games = await fetchSeasonGames(id);
-        rookies.push({ ...r, score: rookieScore(games), gp: games.length });
-        await sleep(250);
+        writeRookieCache(r, rookie); // persist so a reload won't re-fetch
       } catch (e) {
-        if (String(e.message).includes("Rate limited")) throw e;
-        rookies.push({ ...r, score: 0, gp: 0, error: true });
+        // On hard rate-limit exhaustion, surface what we have so far.
+        if (String(e.message).includes("rate limited")) {
+          result.push({ ...team, rookies });
+          throw Object.assign(new Error(e.message), { partial: result });
+        }
+        rookie = { ...r, score: 0, gp: 0, error: true };
       }
+      rookies.push(rookie);
+      done++;
     }
     result.push({ ...team, rookies });
   }
-
-  writeCache(result);
   return result;
-}
-
-function readCache() {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-    const { ts, data } = JSON.parse(raw);
-    if (Date.now() - ts > CACHE_TTL_MS) return null;
-    return data;
-  } catch { return null; }
-}
-function writeCache(data) {
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data })); } catch {}
 }
 
 // ── Rendering ────────────────────────────────────────────────────
@@ -173,6 +215,7 @@ async function run({ force = false } = {}) {
     render(data);
     setStatus(`Updated ${new Date().toLocaleString()}`);
   } catch (e) {
+    if (e.partial) render(e.partial); // show whatever completed before the limit
     setStatus(`⚠️ ${e.message}`);
   } finally {
     document.getElementById("refreshBtn").disabled = false;

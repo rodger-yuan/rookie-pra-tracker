@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rookie PRA League · 2026–27</title>
+  <link rel="preconnect" href="https://api.balldontlie.io" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏀 Rookie PRA League</h1>
+    <p class="subtitle">2026–27 season · top 50 games per rookie · best 5 of 6 count</p>
+    <div class="actions">
+      <button id="refreshBtn">↻ Refresh stats</button>
+      <span id="status" class="status"></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="scoreboard" id="scoreboard">
+      <!-- team summary cards injected here -->
+    </section>
+
+    <section class="teams" id="teams">
+      <!-- per-team rookie breakdowns injected here -->
+    </section>
+
+    <footer class="rules">
+      <h3>Scoring</h3>
+      <ul>
+        <li>Each rookie's score = sum of <strong>PRA</strong> (points + rebounds + assists) over their <strong>top 50 games</strong>.</li>
+        <li>Each team's total = sum of its <strong>best 5 of 6</strong> rookies (lowest rookie is dropped, shown struck through).</li>
+        <li>Stats pulled live from <a href="https://www.balldontlie.io" target="_blank" rel="noopener">balldontlie.io</a>. Cached in your browser for 6 hours.</li>
+      </ul>
+    </footer>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

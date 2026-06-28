@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-27T15:11:13.271Z",
+  "updated": "2026-06-28T11:01:38.919Z",
   "season": 2026,
   "teams": [
     {
@@ -9,43 +9,37 @@
         {
           "display": "Darryn Peterson",
           "name": "Darryn Peterson",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "AJ Dybantsa",
           "name": "AJ Dybantsa",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Yaxel Lendeborg",
           "name": "Yaxel Lendeborg",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Brayden Burries",
           "name": "Brayden Burries",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Caleb Wilson",
           "name": "Caleb Wilson",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Nate Ament",
           "name": "Nate Ament",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         }
       ]
@@ -57,43 +51,37 @@
         {
           "display": "Cameron Boozer",
           "name": "Cameron Boozer",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Darius Acuff Jr.",
           "name": "Darius Acuff",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Mikel Brown Jr.",
           "name": "Mikel Brown",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Kingston Flemings",
           "name": "Kingston Flemings",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Keaton Wagler",
           "name": "Keaton Wagler",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         },
         {
           "display": "Morez Johnson Jr.",
           "name": "Morez Johnson",
-          "score": 0,
-          "gp": 0,
+          "games": [],
           "notFound": true
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23T11:03:47.732Z",
+  "updated": "2026-07-24T11:03:23.476Z",
   "season": 2026,
   "teams": [
     {
@@ -52,37 +52,37 @@
           "display": "Cameron Boozer",
           "name": "Cameron Boozer",
           "games": [],
-          "notFound": true
+          "error": true
         },
         {
           "display": "Darius Acuff Jr.",
           "name": "Darius Acuff",
           "games": [],
-          "notFound": true
+          "error": true
         },
         {
           "display": "Mikel Brown Jr.",
           "name": "Mikel Brown",
           "games": [],
-          "notFound": true
+          "error": true
         },
         {
           "display": "Kingston Flemings",
           "name": "Kingston Flemings",
           "games": [],
-          "notFound": true
+          "error": true
         },
         {
           "display": "Keaton Wagler",
           "name": "Keaton Wagler",
           "games": [],
-          "notFound": true
+          "error": true
         },
         {
           "display": "Morez Johnson Jr.",
           "name": "Morez Johnson",
           "games": [],
-          "notFound": true
+          "error": true
         }
       ]
     }

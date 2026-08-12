@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T09:54:19.647Z",
+  "updated": "2026-08-12T09:56:14.114Z",
   "season": 2026,
   "teams": [
     {
@@ -10,13 +10,13 @@
           "display": "Darryn Peterson",
           "name": "Darryn Peterson",
           "games": [],
-          "error": true
+          "notFound": true
         },
         {
           "display": "AJ Dybantsa",
           "name": "AJ Dybantsa",
           "games": [],
-          "error": true
+          "notFound": true
         },
         {
           "display": "Yaxel Lendeborg",

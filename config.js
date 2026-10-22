@@ -10,7 +10,7 @@ const SEASON = 2026;
 
 // DEMO_MODE loads dummy-data.json so you can preview the UI before the season
 // starts. Set to false to use the real nightly data.json.
-const DEMO_MODE = true;
+const DEMO_MODE = false;
 
 // Rosters. `name` is what's searched on balldontlie — match the NBA spelling.
 // `display` is what's shown on the page.

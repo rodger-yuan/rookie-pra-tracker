@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T01:03:49.296Z",
+  "updated": "2026-10-24T01:54:13.682Z",
   "season": 2026,
   "teams": [
     {
@@ -26,6 +26,23 @@
               "fg3a": 1,
               "ftm": 3,
               "fta": 4
+            },
+            {
+              "date": "2026-10-24",
+              "opp": "NO",
+              "min": 6,
+              "pts": 4,
+              "reb": 1,
+              "ast": 0,
+              "stl": 0,
+              "blk": 0,
+              "tov": 0,
+              "fgm": 2,
+              "fga": 3,
+              "fg3m": 0,
+              "fg3a": 1,
+              "ftm": 0,
+              "fta": 0
             }
           ]
         },
@@ -241,17 +258,17 @@
             {
               "date": "2026-10-23",
               "opp": "CHA",
-              "min": 17,
-              "pts": 2,
-              "reb": 5,
-              "ast": 5,
+              "min": 25,
+              "pts": 5,
+              "reb": 6,
+              "ast": 8,
               "stl": 1,
               "blk": 0,
               "tov": 3,
-              "fgm": 1,
-              "fga": 3,
-              "fg3m": 0,
-              "fg3a": 0,
+              "fgm": 2,
+              "fga": 5,
+              "fg3m": 1,
+              "fg3a": 1,
               "ftm": 0,
               "fta": 0
             }
@@ -304,15 +321,15 @@
             {
               "date": "2026-10-23",
               "opp": "IND",
-              "min": 12,
-              "pts": 6,
-              "reb": 4,
+              "min": 17,
+              "pts": 8,
+              "reb": 6,
               "ast": 0,
               "stl": 0,
               "blk": 0,
               "tov": 2,
-              "fgm": 2,
-              "fga": 4,
+              "fgm": 3,
+              "fga": 5,
               "fg3m": 0,
               "fg3a": 1,
               "ftm": 2,
@@ -321,6 +338,173 @@
           ]
         }
       ]
+    }
+  ],
+  "rookieLeaders": [
+    {
+      "espnId": 5254165,
+      "name": "Keaton Wagler",
+      "pos": "G",
+      "team": "LAC",
+      "gp": 1,
+      "ppg": 15,
+      "rpg": 5,
+      "apg": 5,
+      "prapg": 25
+    },
+    {
+      "espnId": 5095151,
+      "name": "Caleb Wilson",
+      "pos": "F",
+      "team": "CHI",
+      "gp": 2,
+      "ppg": 18.5,
+      "rpg": 5,
+      "apg": 0.5,
+      "prapg": 24
+    },
+    {
+      "espnId": 5041935,
+      "name": "Cameron Boozer",
+      "pos": "F",
+      "team": "MEM",
+      "gp": 1,
+      "ppg": 7,
+      "rpg": 11,
+      "apg": 5,
+      "prapg": 23
+    },
+    {
+      "espnId": 5142620,
+      "name": "Darius Acuff Jr.",
+      "pos": "G",
+      "team": "SAC",
+      "gp": 1,
+      "ppg": 12,
+      "rpg": 3,
+      "apg": 3,
+      "prapg": 18
+    },
+    {
+      "espnId": 5175737,
+      "name": "Yaxel Lendeborg",
+      "pos": "F",
+      "team": "GS",
+      "gp": 1,
+      "ppg": 12,
+      "rpg": 3,
+      "apg": 2,
+      "prapg": 17
+    },
+    {
+      "espnId": 4698719,
+      "name": "Trevon Brazile",
+      "pos": "F",
+      "team": "DEN",
+      "gp": 1,
+      "ppg": 4,
+      "rpg": 12,
+      "apg": 0,
+      "prapg": 16
+    },
+    {
+      "espnId": 5149077,
+      "name": "Kingston Flemings",
+      "pos": "G",
+      "team": "ATL",
+      "gp": 2,
+      "ppg": 2.5,
+      "rpg": 5,
+      "apg": 5.5,
+      "prapg": 13
+    },
+    {
+      "espnId": 4873153,
+      "name": "Morez Johnson Jr.",
+      "pos": "F",
+      "team": "DAL",
+      "gp": 2,
+      "ppg": 7,
+      "rpg": 4.5,
+      "apg": 0.5,
+      "prapg": 12
+    },
+    {
+      "espnId": 5082206,
+      "name": "Brayden Burries",
+      "pos": "G",
+      "team": "MIL",
+      "gp": 2,
+      "ppg": 7.5,
+      "rpg": 3,
+      "apg": 1.5,
+      "prapg": 12
+    },
+    {
+      "espnId": 5101761,
+      "name": "Mikel Brown Jr.",
+      "pos": "G",
+      "team": "BKN",
+      "gp": 1,
+      "ppg": 6,
+      "rpg": 3,
+      "apg": 3,
+      "prapg": 12
+    },
+    {
+      "espnId": 4703396,
+      "name": "Graham Ike",
+      "pos": "F",
+      "team": "GS",
+      "gp": 1,
+      "ppg": 8,
+      "rpg": 2,
+      "apg": 1,
+      "prapg": 11
+    },
+    {
+      "espnId": 5105555,
+      "name": "Tobe Awaka",
+      "pos": "F",
+      "team": "CHI",
+      "gp": 1,
+      "ppg": 2,
+      "rpg": 7,
+      "apg": 2,
+      "prapg": 11
+    },
+    {
+      "espnId": 5281370,
+      "name": "Hannes Steinbach",
+      "pos": "F",
+      "team": "CHA",
+      "gp": 1,
+      "ppg": 6,
+      "rpg": 5,
+      "apg": 0,
+      "prapg": 11
+    },
+    {
+      "espnId": 5041955,
+      "name": "Darryn Peterson",
+      "pos": "G",
+      "team": "UTAH",
+      "gp": 2,
+      "ppg": 6.5,
+      "rpg": 2.5,
+      "apg": 1.5,
+      "prapg": 10.5
+    },
+    {
+      "espnId": 4065813,
+      "name": "Alpha Diallo",
+      "pos": "F",
+      "team": "DEN",
+      "gp": 1,
+      "ppg": 4,
+      "rpg": 2,
+      "apg": 3,
+      "prapg": 9
     }
   ]
 }

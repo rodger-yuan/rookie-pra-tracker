@@ -3,6 +3,7 @@
 const statusEl = document.getElementById("status");
 const scoreboardEl = document.getElementById("scoreboard");
 const teamsEl = document.getElementById("teams");
+const leadersEl = document.getElementById("leaders");
 
 function setStatus(msg) { statusEl.textContent = msg; }
 
@@ -145,6 +146,49 @@ function render(teams) {
   });
 }
 
+// ── League-wide rookie leaderboard ───────────────────────────────
+// Map each owned player's ESPN id to their owner + accent color so rows can be
+// highlighted. Unowned rookies get no highlight.
+function ownersByEspnId() {
+  const map = {};
+  for (const t of TEAMS) for (const r of t.roster) map[r.espnId] = { owner: t.owner, color: t.color };
+  return map;
+}
+
+function renderLeaders(leaders) {
+  if (!leadersEl) return;
+  if (!Array.isArray(leaders) || !leaders.length) { leadersEl.innerHTML = ""; return; }
+  const owners = ownersByEspnId();
+  const rows = leaders.map((r, i) => {
+    const o = owners[r.espnId];
+    const rowAttrs = o ? `class="owned" style="--accent:${o.color}"` : "";
+    const ownerCell = o
+      ? `<span class="owner-chip" style="--accent:${o.color}">${o.owner}</span>`
+      : '<span class="muted">—</span>';
+    return `<tr ${rowAttrs}>
+      <td class="num rank">${i + 1}</td>
+      <td class="rk-name">${r.name}</td>
+      <td>${r.team || "—"}</td>
+      <td>${r.pos || "—"}</td>
+      <td>${ownerCell}</td>
+      <td class="num">${r.gp}</td>
+      <td class="num strong">${fmt(r.prapg)}</td>
+      <td class="num">${fmt(r.ppg)}</td>
+      <td class="num">${fmt(r.rpg)}</td>
+      <td class="num">${fmt(r.apg)}</td>
+    </tr>`;
+  }).join("");
+  leadersEl.innerHTML = `
+    <h2>Top 15 NBA Rookies <span class="muted">· ranked by PRA per game</span></h2>
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th class="num">#</th><th class="rk-name">Player</th><th>Team</th><th>Pos</th><th>Owner</th>
+        <th class="num">GP</th><th class="num">PRA/G</th><th class="num">PPG</th><th class="num">RPG</th><th class="num">APG</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+}
+
 // ── Last-5-games modal ───────────────────────────────────────────
 function openModal(ti, ri) {
   const r = CURRENT[ti].rookies[ri];
@@ -186,6 +230,7 @@ async function run() {
     const snap = await loadStatic("data.json");
     if (snap) {
       render(snap.teams);
+      renderLeaders(snap.rookieLeaders);
       setStatus(`Auto-updated nightly · last run ${new Date(snap.updated).toLocaleString()}`);
       return;
     }

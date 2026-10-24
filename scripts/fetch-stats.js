@@ -71,17 +71,60 @@ function parseStats(statDoc) {
   };
 }
 
-async function teamAbbrevMap() {
+// One pass over the 30 team rosters: returns a teamId->abbreviation map and
+// the full list of athlete refs (used to find league-wide rookies).
+async function collectRosters() {
   const list = await getJSON(`${CORE}/seasons/${ESPN_SEASON}/teams?limit=40`);
-  const refs = (list.items || []).map((x) => x["$ref"]);
-  const map = {};
-  await pool(refs, 8, async (ref) => {
+  const teamRefs = (list.items || []).map((x) => x["$ref"]);
+  const abbrev = {};
+  const athleteRefs = [];
+  await pool(teamRefs, 8, async (ref) => {
+    const id = idOf(ref);
     try {
       const t = await getJSON(ref);
-      map[String(t.id)] = t.abbreviation;
+      abbrev[String(t.id)] = t.abbreviation;
+    } catch {}
+    try {
+      const ro = await getJSON(`${CORE}/seasons/${ESPN_SEASON}/teams/${id}/athletes?limit=30`);
+      for (const a of ro.items || []) athleteRefs.push(a["$ref"]);
     } catch {}
   });
-  return map;
+  return { abbrev, athleteRefs };
+}
+
+// League-wide top-15 rookies (experience.years === 0) ranked by PRA per game,
+// computed from the same regular-season game logs as the main tables.
+async function fetchRookieLeaders(athleteRefs, regStart, abbrev) {
+  const docs = await pool(athleteRefs, 12, async (ref) => {
+    try {
+      const a = await getJSON(ref);
+      if (!a || !a.experience || a.experience.years !== 0) return null;
+      return {
+        espnId: Number(a.id),
+        name: a.displayName,
+        pos: (a.position && a.position.abbreviation) || "",
+        team: abbrev[idOf((a.team && a.team["$ref"]) || "")] || "",
+      };
+    } catch {
+      return null;
+    }
+  });
+  const rookies = docs.filter(Boolean);
+  console.log(`Found ${rookies.length} rookies league-wide; computing PRA/G…`);
+
+  const rated = await pool(rookies, 4, async (r) => {
+    const games = await fetchSeasonGames(r.espnId, regStart, abbrev);
+    const gp = games.length;
+    if (!gp) return null;
+    const sum = (f) => games.reduce((s, g) => s + (g[f] || 0), 0);
+    const ppg = sum("pts") / gp, rpg = sum("reb") / gp, apg = sum("ast") / gp;
+    return { ...r, gp, ppg, rpg, apg, prapg: ppg + rpg + apg };
+  });
+
+  return rated
+    .filter(Boolean)
+    .sort((a, b) => b.prapg - a.prapg)
+    .slice(0, 15);
 }
 
 async function fetchSeasonGames(espnId, regStart, abbrev) {
@@ -122,7 +165,7 @@ async function fetchSeasonGames(espnId, regStart, abbrev) {
   } catch {
     console.log("Could not read regular-season start; including all dated games.");
   }
-  const abbrev = await teamAbbrevMap();
+  const { abbrev, athleteRefs } = await collectRosters();
 
   const out = [];
   for (const team of TEAMS) {
@@ -141,7 +184,10 @@ async function fetchSeasonGames(espnId, regStart, abbrev) {
     out.push({ owner: team.owner, color: team.color, rookies });
   }
 
-  const payload = { updated: new Date().toISOString(), season: SEASON, teams: out };
+  const rookieLeaders = await fetchRookieLeaders(athleteRefs, regStart, abbrev);
+  console.log(`Top rookie by PRA/G: ${rookieLeaders[0] ? rookieLeaders[0].name + " (" + rookieLeaders[0].prapg.toFixed(1) + ")" : "none yet"}`);
+
+  const payload = { updated: new Date().toISOString(), season: SEASON, teams: out, rookieLeaders };
   fs.writeFileSync(path.join(__dirname, "..", "data.json"), JSON.stringify(payload, null, 2) + "\n");
   console.log("Wrote data.json");
 })().catch((e) => {

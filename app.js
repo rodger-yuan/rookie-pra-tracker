@@ -12,7 +12,7 @@ const praOf = (g) => (g.pts || 0) + (g.reb || 0) + (g.ast || 0);
 function computeRookie(r) {
   const games = Array.isArray(r.games) ? r.games : [];
   const gp = games.length;
-  const base = { ...r, games, gp, gc: 0, pra: 0, pts: 0, reb: 0, ast: 0,
+  const base = { ...r, games, gp, gc: 0, pra: 0, prapg: 0, pts: 0, reb: 0, ast: 0,
     mpg: 0, ppg: 0, rpg: 0, apg: 0, spg: 0, bpg: 0,
     fgPct: 0, fg3Pct: 0, tsPct: 0, fgpg: 0, fg3pg: 0, last5: [] };
   if (!gp) return base;
@@ -29,6 +29,7 @@ function computeRookie(r) {
   base.ppg = sum(games, "pts") / gp;
   base.rpg = sum(games, "reb") / gp;
   base.apg = sum(games, "ast") / gp;
+  base.prapg = base.ppg + base.rpg + base.apg; // avg PRA per game (all games)
   base.spg = sum(games, "stl") / gp;
   base.bpg = sum(games, "blk") / gp;
   base.fgpg = sum(games, "fgm") / gp;
@@ -105,7 +106,7 @@ function render(teams) {
   const head = `<tr>
       <th class="sticky-col">Player</th>
       <th>Top 5</th><th>GP</th><th>GC</th>
-      <th class="grp">PRA</th><th>PTS</th><th>REB</th><th>AST</th>
+      <th class="grp">PRA</th><th>PRA/G</th><th>PTS</th><th>REB</th><th>AST</th>
       ${STAT_COLS.map((c) => `<th>${c.label}</th>`).join("")}
     </tr>`;
 
@@ -123,6 +124,7 @@ function render(teams) {
         <td>${r.gp}</td>
         <td>${r.gc}</td>
         <td class="grp num strong">${intc(r.pra)}</td>
+        <td class="num">${fmt(r.prapg)}</td>
         <td class="num">${intc(r.pts)}</td>
         <td class="num">${intc(r.reb)}</td>
         <td class="num">${intc(r.ast)}</td>

@@ -1,70 +1,10 @@
 "use strict";
 
-const API_BASE = "https://api.balldontlie.io/v1";
-const CACHE_KEY = `rookie-pra-${SEASON}`;
-const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
-
 const statusEl = document.getElementById("status");
 const scoreboardEl = document.getElementById("scoreboard");
 const teamsEl = document.getElementById("teams");
 
 function setStatus(msg) { statusEl.textContent = msg; }
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-// ── Throttled API (client-side fallback only) ────────────────────
-const MIN_GAP_MS = 13000;
-let _chain = Promise.resolve();
-let _lastReq = 0;
-
-async function rawApi(path) {
-  for (let attempt = 0; attempt < 6; attempt++) {
-    const res = await fetch(`${API_BASE}${path}`, { headers: { Authorization: BALLDONTLIE_API_KEY } });
-    if (res.status === 429) {
-      const ra = parseInt(res.headers.get("Retry-After"), 10);
-      const wait = (Number.isFinite(ra) ? ra : 15 * (attempt + 1)) * 1000;
-      setStatus(`Rate limited — waiting ${Math.round(wait / 1000)}s before retrying…`);
-      await sleep(wait);
-      continue;
-    }
-    if (!res.ok) throw new Error(`API ${res.status} on ${path}`);
-    return res.json();
-  }
-  throw new Error("Still rate limited after several retries — try again in a few minutes.");
-}
-function api(path) {
-  _chain = _chain.then(async () => {
-    const wait = Math.max(0, MIN_GAP_MS - (Date.now() - _lastReq));
-    if (wait) await sleep(wait);
-    try { return await rawApi(path); } finally { _lastReq = Date.now(); }
-  });
-  return _chain;
-}
-
-async function findPlayerId(name) {
-  const { data } = await api(`/players?search=${encodeURIComponent(name)}&per_page=25`);
-  if (!data || data.length === 0) return null;
-  const exact = data.find((p) => `${p.first_name} ${p.last_name}`.toLowerCase() === name.toLowerCase());
-  return (exact || data[0]).id;
-}
-async function fetchSeasonGames(playerId) {
-  const games = [];
-  let cursor = null;
-  do {
-    const q = `/stats?seasons[]=${SEASON}&player_ids[]=${playerId}&per_page=100` + (cursor ? `&cursor=${cursor}` : "");
-    const { data, meta } = await api(q);
-    for (const g of data) {
-      if (g.min === null || g.min === "00" || g.min === "0") continue;
-      games.push({
-        date: (g.game && g.game.date ? g.game.date.slice(0, 10) : ""),
-        opp: "", min: parseInt(g.min, 10) || 0,
-        pts: g.pts || 0, reb: g.reb || 0, ast: g.ast || 0, stl: g.stl || 0, blk: g.blk || 0, tov: g.turnover || 0,
-        fgm: g.fgm || 0, fga: g.fga || 0, fg3m: g.fg3m || 0, fg3a: g.fg3a || 0, ftm: g.ftm || 0, fta: g.fta || 0,
-      });
-    }
-    cursor = meta && meta.next_cursor ? meta.next_cursor : null;
-  } while (cursor);
-  return games;
-}
 
 // ── Stat computation (single source: a rookie's games[] array) ───
 const praOf = (g) => (g.pts || 0) + (g.reb || 0) + (g.ast || 0);
@@ -115,47 +55,6 @@ async function loadStatic(file) {
     if (!j || !Array.isArray(j.teams) || !j.teams.length) return null;
     return j;
   } catch { return null; }
-}
-
-// Client-side live fetch (fallback when no data.json exists yet).
-function rookieCacheKey(r) { return `${CACHE_KEY}-r-${r.name}`; }
-function readRookieCache(r) {
-  try {
-    const raw = localStorage.getItem(rookieCacheKey(r));
-    if (!raw) return null;
-    const { ts, rookie } = JSON.parse(raw);
-    if (Date.now() - ts > CACHE_TTL_MS) return null;
-    return rookie;
-  } catch { return null; }
-}
-function writeRookieCache(r, rookie) {
-  try { localStorage.setItem(rookieCacheKey(r), JSON.stringify({ ts: Date.now(), rookie })); } catch {}
-}
-async function loadLive({ force = false } = {}) {
-  if (!BALLDONTLIE_API_KEY || BALLDONTLIE_API_KEY === "PASTE_YOUR_FREE_KEY_HERE")
-    throw new Error("No API key set — edit config.js and add your free balldontlie key.");
-  const teams = [];
-  for (const team of TEAMS) {
-    const rookies = [];
-    for (const r of team.roster) {
-      const cached = !force && readRookieCache(r);
-      if (cached) { rookies.push(cached); continue; }
-      setStatus(`Fetching ${r.display}…`);
-      let rookie;
-      try {
-        const id = await findPlayerId(r.name);
-        rookie = id === null ? { display: r.display, name: r.name, games: [], notFound: true }
-          : { display: r.display, name: r.name, games: await fetchSeasonGames(id) };
-        writeRookieCache(r, rookie);
-      } catch (e) {
-        if (String(e.message).includes("rate limited")) throw e;
-        rookie = { display: r.display, name: r.name, games: [], error: true };
-      }
-      rookies.push(rookie);
-    }
-    teams.push({ owner: team.owner, color: team.color, rookies });
-  }
-  return { teams };
 }
 
 // ── Scoring / standings ──────────────────────────────────────────
@@ -273,20 +172,22 @@ document.getElementById("modal").addEventListener("click", (e) => { if (e.target
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
 // ── Boot ─────────────────────────────────────────────────────────
-async function run({ force = false } = {}) {
+async function run() {
   document.getElementById("refreshBtn").disabled = true;
   try {
     if (DEMO_MODE) {
       const snap = await loadStatic("dummy-data.json");
       if (snap) { render(snap.teams); setStatus("⚠️ DEMO DATA — set DEMO_MODE=false in config.js for live stats"); return; }
     }
-    if (!force) {
-      const snap = await loadStatic("data.json");
-      if (snap) { render(snap.teams); setStatus(`Auto-updated nightly · last run ${new Date(snap.updated).toLocaleString()}`); return; }
+    // Stats are refreshed nightly by GitHub Actions into data.json. loadStatic
+    // cache-busts, so the refresh button always pulls the latest committed file.
+    const snap = await loadStatic("data.json");
+    if (snap) {
+      render(snap.teams);
+      setStatus(`Auto-updated nightly · last run ${new Date(snap.updated).toLocaleString()}`);
+      return;
     }
-    const live = await loadLive({ force });
-    render(live.teams);
-    setStatus(`Updated ${new Date().toLocaleString()} (live)`);
+    setStatus("⚠️ No data yet — the nightly update hasn't produced data.json.");
   } catch (e) {
     setStatus(`⚠️ ${e.message}`);
   } finally {
@@ -294,5 +195,5 @@ async function run({ force = false } = {}) {
   }
 }
 
-document.getElementById("refreshBtn").addEventListener("click", () => run({ force: true }));
+document.getElementById("refreshBtn").addEventListener("click", () => run());
 run();

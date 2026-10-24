@@ -5,12 +5,10 @@ A live head-to-head tracker for a 6-rookie draft league between **Rodger** and *
 ## Scoring
 - **Per rookie:** sum of PRA (points + rebounds + assists) over their **top 50 games**.
 - **Per team:** sum of the **best 5 of 6** rookies (lowest is dropped).
-- Stats pulled live from [balldontlie.io](https://www.balldontlie.io) and cached in your browser for 6 hours.
+- Stats come from ESPN's free public API and are refreshed nightly by a GitHub Action into `data.json`, which the site reads directly.
 
 ## Setup (one time)
-1. Create a free account + API key at <https://app.balldontlie.io>.
-2. Open `config.js` and paste the key into `BALLDONTLIE_API_KEY`.
-3. (Optional) adjust rosters, season, or scoring knobs in `config.js`.
+No API key needed. Players are looked up by their **ESPN athlete id** (the number in an `espn.com/nba/player/_/id/<ID>/` URL). To change rosters, season, or scoring, edit `config.js`.
 
 ## Deploy to GitHub Pages
 1. Create a new GitHub repo and push these files (keep them at the repo root).
@@ -25,6 +23,5 @@ python3 -m http.server 8000
 ```
 
 ## Notes
-- These are 2026 draft prospects — the tracker reads **0** and shows *“not in league yet”* until they're on NBA rosters and appear in the API. It fills in automatically once the season starts.
-- The free-tier API key is visible in page source on a public site. That's fine for a read-only free key.
-- Free tier is rate-limited (~5 requests/min). The app fetches slowly and caches results; hit **Refresh stats** to force an update.
+- Each rookie reads **0** until they've played regular-season NBA games; the nightly job fills stats in automatically as games happen.
+- The nightly update runs via `.github/workflows/update-stats.yml` (and can be triggered manually from the repo's **Actions** tab). **Refresh stats** on the page re-pulls the latest `data.json`.

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T13:59:27.985Z",
+  "updated": "2026-10-24T01:03:49.296Z",
   "season": 2026,
   "teams": [
     {
@@ -9,38 +9,138 @@
         {
           "display": "Darryn Peterson",
           "name": "Darryn Peterson",
-          "games": [],
-          "notFound": true
+          "games": [
+            {
+              "date": "2026-10-22",
+              "opp": "MEM",
+              "min": 31,
+              "pts": 9,
+              "reb": 4,
+              "ast": 3,
+              "stl": 0,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 3,
+              "fga": 7,
+              "fg3m": 0,
+              "fg3a": 1,
+              "ftm": 3,
+              "fta": 4
+            }
+          ]
         },
         {
           "display": "AJ Dybantsa",
           "name": "AJ Dybantsa",
-          "games": [],
-          "notFound": true
+          "games": []
         },
         {
           "display": "Yaxel Lendeborg",
           "name": "Yaxel Lendeborg",
-          "games": [],
-          "notFound": true
+          "games": [
+            {
+              "date": "2026-10-22",
+              "opp": "LAL",
+              "min": 29,
+              "pts": 12,
+              "reb": 3,
+              "ast": 2,
+              "stl": 1,
+              "blk": 0,
+              "tov": 0,
+              "fgm": 5,
+              "fga": 11,
+              "fg3m": 1,
+              "fg3a": 4,
+              "ftm": 1,
+              "fta": 3
+            }
+          ]
         },
         {
           "display": "Brayden Burries",
           "name": "Brayden Burries",
-          "games": [],
-          "notFound": true
+          "games": [
+            {
+              "date": "2026-10-21",
+              "opp": "WSH",
+              "min": 16,
+              "pts": 12,
+              "reb": 5,
+              "ast": 0,
+              "stl": 0,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 3,
+              "fga": 6,
+              "fg3m": 2,
+              "fg3a": 2,
+              "ftm": 4,
+              "fta": 5
+            },
+            {
+              "date": "2026-10-23",
+              "opp": "CHI",
+              "min": 8,
+              "pts": 3,
+              "reb": 1,
+              "ast": 3,
+              "stl": 1,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 1,
+              "fga": 3,
+              "fg3m": 1,
+              "fg3a": 3,
+              "ftm": 0,
+              "fta": 2
+            }
+          ]
         },
         {
           "display": "Caleb Wilson",
           "name": "Caleb Wilson",
-          "games": [],
-          "notFound": true
+          "games": [
+            {
+              "date": "2026-10-21",
+              "opp": "TOR",
+              "min": 32,
+              "pts": 16,
+              "reb": 4,
+              "ast": 0,
+              "stl": 3,
+              "blk": 1,
+              "tov": 9,
+              "fgm": 7,
+              "fga": 21,
+              "fg3m": 1,
+              "fg3a": 8,
+              "ftm": 1,
+              "fta": 2
+            },
+            {
+              "date": "2026-10-23",
+              "opp": "MIL",
+              "min": 33,
+              "pts": 21,
+              "reb": 6,
+              "ast": 1,
+              "stl": 1,
+              "blk": 2,
+              "tov": 3,
+              "fgm": 7,
+              "fga": 14,
+              "fg3m": 2,
+              "fg3a": 6,
+              "ftm": 5,
+              "fta": 6
+            }
+          ]
         },
         {
           "display": "Nate Ament",
           "name": "Nate Ament",
-          "games": [],
-          "notFound": true
+          "games": []
         }
       ]
     },
@@ -51,38 +151,174 @@
         {
           "display": "Cameron Boozer",
           "name": "Cameron Boozer",
-          "games": [],
-          "notFound": true
+          "games": [
+            {
+              "date": "2026-10-22",
+              "opp": "UTAH",
+              "min": 33,
+              "pts": 7,
+              "reb": 11,
+              "ast": 5,
+              "stl": 0,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 2,
+              "fga": 15,
+              "fg3m": 0,
+              "fg3a": 6,
+              "ftm": 3,
+              "fta": 4
+            }
+          ]
         },
         {
           "display": "Darius Acuff Jr.",
-          "name": "Darius Acuff",
-          "games": [],
-          "notFound": true
+          "name": "Darius Acuff Jr.",
+          "games": [
+            {
+              "date": "2026-10-22",
+              "opp": "LAC",
+              "min": 35,
+              "pts": 12,
+              "reb": 3,
+              "ast": 3,
+              "stl": 3,
+              "blk": 0,
+              "tov": 4,
+              "fgm": 5,
+              "fga": 24,
+              "fg3m": 0,
+              "fg3a": 7,
+              "ftm": 2,
+              "fta": 5
+            }
+          ]
         },
         {
           "display": "Mikel Brown Jr.",
-          "name": "Mikel Brown",
-          "games": [],
-          "notFound": true
+          "name": "Mikel Brown Jr.",
+          "games": [
+            {
+              "date": "2026-10-21",
+              "opp": "CHA",
+              "min": 20,
+              "pts": 6,
+              "reb": 3,
+              "ast": 3,
+              "stl": 0,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 2,
+              "fga": 8,
+              "fg3m": 1,
+              "fg3a": 3,
+              "ftm": 1,
+              "fta": 1
+            }
+          ]
         },
         {
           "display": "Kingston Flemings",
           "name": "Kingston Flemings",
-          "games": [],
-          "notFound": true
+          "games": [
+            {
+              "date": "2026-10-21",
+              "opp": "ORL",
+              "min": 15,
+              "pts": 0,
+              "reb": 4,
+              "ast": 3,
+              "stl": 0,
+              "blk": 1,
+              "tov": 2,
+              "fgm": 0,
+              "fga": 5,
+              "fg3m": 0,
+              "fg3a": 1,
+              "ftm": 0,
+              "fta": 0
+            },
+            {
+              "date": "2026-10-23",
+              "opp": "CHA",
+              "min": 17,
+              "pts": 2,
+              "reb": 5,
+              "ast": 5,
+              "stl": 1,
+              "blk": 0,
+              "tov": 3,
+              "fgm": 1,
+              "fga": 3,
+              "fg3m": 0,
+              "fg3a": 0,
+              "ftm": 0,
+              "fta": 0
+            }
+          ]
         },
         {
           "display": "Keaton Wagler",
           "name": "Keaton Wagler",
-          "games": [],
-          "notFound": true
+          "games": [
+            {
+              "date": "2026-10-22",
+              "opp": "SAC",
+              "min": 29,
+              "pts": 15,
+              "reb": 5,
+              "ast": 5,
+              "stl": 2,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 4,
+              "fga": 8,
+              "fg3m": 3,
+              "fg3a": 6,
+              "ftm": 4,
+              "fta": 4
+            }
+          ]
         },
         {
           "display": "Morez Johnson Jr.",
-          "name": "Morez Johnson",
-          "games": [],
-          "notFound": true
+          "name": "Morez Johnson Jr.",
+          "games": [
+            {
+              "date": "2026-10-22",
+              "opp": "HOU",
+              "min": 14,
+              "pts": 6,
+              "reb": 3,
+              "ast": 1,
+              "stl": 0,
+              "blk": 0,
+              "tov": 0,
+              "fgm": 3,
+              "fga": 5,
+              "fg3m": 0,
+              "fg3a": 0,
+              "ftm": 0,
+              "fta": 2
+            },
+            {
+              "date": "2026-10-23",
+              "opp": "IND",
+              "min": 12,
+              "pts": 6,
+              "reb": 4,
+              "ast": 0,
+              "stl": 0,
+              "blk": 0,
+              "tov": 2,
+              "fgm": 2,
+              "fga": 4,
+              "fg3m": 0,
+              "fg3a": 1,
+              "ftm": 2,
+              "fta": 2
+            }
+          ]
         }
       ]
     }

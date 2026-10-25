@@ -59,6 +59,94 @@ async function loadStatic(file) {
   } catch { return null; }
 }
 
+// ── Live refresh from ESPN (browser) ─────────────────────────────
+// The page normally reads the nightly data.json. The Refresh button pulls the
+// head-to-head rosters live from ESPN's free API so scores are up to the
+// minute. (The 15-rookie leaderboard needs a league-wide scan, so it stays on
+// the nightly snapshot.) Mirrors scripts/fetch-stats.js; ESPN labels seasons
+// by end year, so ESPN season = SEASON + 1.
+const ESPN_CORE = "https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba";
+const ESPN_SEASON = SEASON + 1;
+const espnIdOf = (ref) => (String(ref).match(/\/(\d+)(?:\?|$)/) || [])[1];
+async function espnJSON(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`ESPN ${res.status}`);
+  return res.json();
+}
+async function espnPool(items, n, fn) {
+  const out = new Array(items.length);
+  let i = 0;
+  await Promise.all(Array.from({ length: Math.min(n, items.length) }, async () => {
+    while (i < items.length) { const k = i++; out[k] = await fn(items[k]); }
+  }));
+  return out;
+}
+function parseEspnStats(doc) {
+  const flat = {};
+  for (const c of (doc.splits && doc.splits.categories) || [])
+    for (const s of c.stats || []) flat[s.name] = s.value;
+  const num = (k) => Number(flat[k]) || 0;
+  return {
+    min: Math.round(num("minutes")), pts: num("points"), reb: num("rebounds"), ast: num("assists"),
+    stl: num("steals"), blk: num("blocks"), tov: num("turnovers"),
+    fgm: num("fieldGoalsMade"), fga: num("fieldGoalsAttempted"),
+    fg3m: num("threePointFieldGoalsMade"), fg3a: num("threePointFieldGoalsAttempted"),
+    ftm: num("freeThrowsMade"), fta: num("freeThrowsAttempted"),
+  };
+}
+async function espnTeamAbbrev() {
+  const list = await espnJSON(`${ESPN_CORE}/seasons/${ESPN_SEASON}/teams?limit=40`);
+  const map = {};
+  await espnPool((list.items || []).map((x) => x["$ref"]), 8, async (ref) => {
+    try { const t = await espnJSON(ref); map[String(t.id)] = t.abbreviation; } catch {}
+  });
+  return map;
+}
+async function espnGames(espnId, regStart, abbrev) {
+  const el = await espnJSON(`${ESPN_CORE}/seasons/${ESPN_SEASON}/athletes/${espnId}/eventlog`);
+  const items = ((el.events && el.events.items) || []).filter((it) => it.played && it.statistics);
+  if (!items.length) return [];
+  const games = await espnPool(items, 6, async (it) => {
+    try {
+      const [statDoc, ev] = await Promise.all([espnJSON(it.statistics["$ref"]), espnJSON(it.event["$ref"])]);
+      const date = ev.date ? ev.date.slice(0, 10) : "";
+      if (regStart && date && date < regStart) return null;
+      const comp = (ev.competitions && ev.competitions[0]) || {};
+      const oppId = (comp.competitors || [])
+        .map((c) => espnIdOf(c.team && c.team["$ref"] ? c.team["$ref"] : ""))
+        .find((tid) => tid && tid !== String(it.teamId));
+      const s = parseEspnStats(statDoc);
+      if (!s.min) return null;
+      return { date, opp: (oppId && abbrev[oppId]) || "", ...s };
+    } catch { return null; }
+  });
+  return games.filter(Boolean).sort((a, b) => (a.date < b.date ? -1 : 1));
+}
+async function loadLive() {
+  let regStart = "";
+  try {
+    const t2 = await espnJSON(`${ESPN_CORE}/seasons/${ESPN_SEASON}/types/2`);
+    regStart = t2.startDate ? t2.startDate.slice(0, 10) : "";
+  } catch {}
+  const abbrev = await espnTeamAbbrev();
+  const teams = [];
+  let done = 0;
+  const total = TEAMS.reduce((n, t) => n + t.roster.length, 0);
+  for (const team of TEAMS) {
+    const rookies = [];
+    for (const r of team.roster) {
+      setStatus(`Fetching live stats… (${++done}/${total}) ${r.display}`);
+      try {
+        rookies.push({ display: r.display, name: r.display, games: await espnGames(r.espnId, regStart, abbrev) });
+      } catch {
+        rookies.push({ display: r.display, name: r.display, games: [], error: true });
+      }
+    }
+    teams.push({ owner: team.owner, color: team.color, rookies });
+  }
+  return { teams };
+}
+
 // ── Scoring / standings ──────────────────────────────────────────
 function buildStandings(teams) {
   return teams.map((t) => {
@@ -179,7 +267,7 @@ function renderLeaders(leaders) {
     </tr>`;
   }).join("");
   leadersEl.innerHTML = `
-    <h2>Top 15 NBA Rookies <span class="muted">· ranked by PRA per game</span></h2>
+    <h2>Top 15 NBA Rookies <span class="muted">· by PRA per game · updated nightly</span></h2>
     <div class="table-wrap"><table>
       <thead><tr>
         <th class="num">#</th><th class="rk-name">Player</th><th>Team</th><th>Pos</th><th>Owner</th>
@@ -218,15 +306,25 @@ document.getElementById("modal").addEventListener("click", (e) => { if (e.target
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
 // ── Boot ─────────────────────────────────────────────────────────
-async function run() {
+// On load (live=false): read the nightly data.json — instant, includes the
+// leaderboard. On Refresh (live=true): pull the head-to-head rosters live from
+// ESPN, and still show the nightly leaderboard snapshot.
+async function run({ live = false } = {}) {
   document.getElementById("refreshBtn").disabled = true;
   try {
     if (DEMO_MODE) {
       const snap = await loadStatic("dummy-data.json");
       if (snap) { render(snap.teams); setStatus("⚠️ DEMO DATA — set DEMO_MODE=false in config.js for live stats"); return; }
     }
-    // Stats are refreshed nightly by GitHub Actions into data.json. loadStatic
-    // cache-busts, so the refresh button always pulls the latest committed file.
+
+    if (live) {
+      const [liveData, snap] = await Promise.all([loadLive(), loadStatic("data.json")]);
+      render(liveData.teams);
+      if (snap) renderLeaders(snap.rookieLeaders);
+      setStatus(`Live · updated ${new Date().toLocaleTimeString()}`);
+      return;
+    }
+
     const snap = await loadStatic("data.json");
     if (snap) {
       render(snap.teams);
@@ -242,5 +340,5 @@ async function run() {
   }
 }
 
-document.getElementById("refreshBtn").addEventListener("click", () => run());
+document.getElementById("refreshBtn").addEventListener("click", () => run({ live: true }));
 run();

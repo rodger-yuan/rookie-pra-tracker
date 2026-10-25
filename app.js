@@ -149,6 +149,21 @@ async function loadLive() {
   return { teams };
 }
 
+// Persist the most recent live refresh so it survives page reloads. It's used
+// on the next load only while it's newer than the nightly data.json.
+const LIVE_KEY = `rookie-live-${SEASON}`;
+function saveLiveSnapshot(teams) {
+  try { localStorage.setItem(LIVE_KEY, JSON.stringify({ updated: new Date().toISOString(), teams })); } catch {}
+}
+function readLiveSnapshot() {
+  try {
+    const raw = localStorage.getItem(LIVE_KEY);
+    if (!raw) return null;
+    const j = JSON.parse(raw);
+    return j && Array.isArray(j.teams) ? j : null;
+  } catch { return null; }
+}
+
 // ── Scoring / standings ──────────────────────────────────────────
 function buildStandings(teams) {
   return teams.map((t) => {
@@ -321,13 +336,23 @@ async function run({ live = false } = {}) {
 
     if (live) {
       const [liveData, snap] = await Promise.all([loadLive(), loadStatic("data.json")]);
+      saveLiveSnapshot(liveData.teams);
       render(liveData.teams);
       if (snap) renderLeaders(snap.rookieLeaders);
-      setStatus(`Live · updated ${new Date().toLocaleTimeString()}`);
+      setStatus(`Live · updated ${new Date().toLocaleString()}`);
       return;
     }
 
     const snap = await loadStatic("data.json");
+    // Prefer a saved live refresh when it's newer than the nightly snapshot,
+    // so a manual refresh persists across reloads until the next nightly run.
+    const saved = readLiveSnapshot();
+    if (saved && (!snap || saved.updated > snap.updated)) {
+      render(saved.teams);
+      if (snap) renderLeaders(snap.rookieLeaders);
+      setStatus(`Live · updated ${new Date(saved.updated).toLocaleString()}`);
+      return;
+    }
     if (snap) {
       render(snap.teams);
       renderLeaders(snap.rookieLeaders);

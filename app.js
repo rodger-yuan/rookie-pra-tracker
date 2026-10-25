@@ -69,7 +69,9 @@ const ESPN_CORE = "https://sports.core.api.espn.com/v2/sports/basketball/leagues
 const ESPN_SEASON = SEASON + 1;
 const espnIdOf = (ref) => (String(ref).match(/\/(\d+)(?:\?|$)/) || [])[1];
 async function espnJSON(url) {
-  const res = await fetch(url);
+  // ESPN returns internal $ref links as http://; upgrade to https so they are
+  // not blocked as mixed content on the https site.
+  const res = await fetch(String(url).replace(/^http:\/\//, "https://"));
   if (!res.ok) throw new Error(`ESPN ${res.status}`);
   return res.json();
 }

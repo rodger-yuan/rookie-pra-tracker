@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T15:38:54.257Z",
+  "updated": "2026-10-27T15:02:02.043Z",
   "season": 2026,
   "teams": [
     {
@@ -60,6 +60,23 @@
               "fg3a": 4,
               "ftm": 0,
               "fta": 0
+            },
+            {
+              "date": "2026-10-27",
+              "opp": "MEM",
+              "min": 26,
+              "pts": 14,
+              "reb": 7,
+              "ast": 4,
+              "stl": 1,
+              "blk": 0,
+              "tov": 0,
+              "fgm": 5,
+              "fga": 18,
+              "fg3m": 3,
+              "fg3a": 5,
+              "ftm": 1,
+              "fta": 1
             }
           ]
         },
@@ -122,6 +139,23 @@
               "fg3a": 11,
               "ftm": 2,
               "fta": 3
+            },
+            {
+              "date": "2026-10-27",
+              "opp": "DEN",
+              "min": 31,
+              "pts": 31,
+              "reb": 12,
+              "ast": 6,
+              "stl": 0,
+              "blk": 1,
+              "tov": 3,
+              "fgm": 9,
+              "fga": 19,
+              "fg3m": 1,
+              "fg3a": 8,
+              "ftm": 12,
+              "fta": 13
             }
           ]
         },
@@ -179,6 +213,23 @@
               "fg3a": 4,
               "ftm": 3,
               "fta": 4
+            },
+            {
+              "date": "2026-10-27",
+              "opp": "IND",
+              "min": 16,
+              "pts": 4,
+              "reb": 2,
+              "ast": 1,
+              "stl": 1,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 2,
+              "fga": 5,
+              "fg3m": 0,
+              "fg3a": 2,
+              "ftm": 0,
+              "fta": 0
             }
           ]
         },
@@ -236,6 +287,23 @@
               "fg3a": 9,
               "ftm": 9,
               "fta": 11
+            },
+            {
+              "date": "2026-10-26",
+              "opp": "BOS",
+              "min": 32,
+              "pts": 17,
+              "reb": 5,
+              "ast": 3,
+              "stl": 1,
+              "blk": 2,
+              "tov": 3,
+              "fgm": 7,
+              "fga": 15,
+              "fg3m": 1,
+              "fg3a": 5,
+              "ftm": 2,
+              "fta": 4
             }
           ]
         },
@@ -259,6 +327,23 @@
               "fg3a": 0,
               "ftm": 1,
               "fta": 4
+            },
+            {
+              "date": "2026-10-27",
+              "opp": "IND",
+              "min": 14,
+              "pts": 7,
+              "reb": 3,
+              "ast": 0,
+              "stl": 0,
+              "blk": 0,
+              "tov": 0,
+              "fgm": 3,
+              "fga": 8,
+              "fg3m": 1,
+              "fg3a": 2,
+              "ftm": 0,
+              "fta": 0
             }
           ]
         }
@@ -310,18 +395,35 @@
               "date": "2026-10-26",
               "opp": "SAC",
               "min": 31,
-              "pts": 16,
+              "pts": 14,
               "reb": 11,
               "ast": 4,
               "stl": 0,
               "blk": 2,
               "tov": 1,
-              "fgm": 6,
-              "fga": 21,
+              "fgm": 5,
+              "fga": 20,
               "fg3m": 2,
               "fg3a": 7,
               "ftm": 2,
               "fta": 2
+            },
+            {
+              "date": "2026-10-27",
+              "opp": "UTAH",
+              "min": 31,
+              "pts": 13,
+              "reb": 7,
+              "ast": 4,
+              "stl": 0,
+              "blk": 1,
+              "tov": 1,
+              "fgm": 4,
+              "fga": 12,
+              "fg3m": 1,
+              "fg3a": 6,
+              "ftm": 4,
+              "fta": 4
             }
           ]
         },
@@ -476,6 +578,23 @@
               "fg3a": 2,
               "ftm": 0,
               "fta": 0
+            },
+            {
+              "date": "2026-10-27",
+              "opp": "HOU",
+              "min": 18,
+              "pts": 6,
+              "reb": 1,
+              "ast": 4,
+              "stl": 0,
+              "blk": 0,
+              "tov": 4,
+              "fgm": 3,
+              "fga": 4,
+              "fg3m": 0,
+              "fg3a": 1,
+              "ftm": 0,
+              "fta": 1
             }
           ]
         },
@@ -590,6 +709,23 @@
               "fg3a": 2,
               "ftm": 2,
               "fta": 2
+            },
+            {
+              "date": "2026-10-26",
+              "opp": "MIA",
+              "min": 15,
+              "pts": 6,
+              "reb": 2,
+              "ast": 1,
+              "stl": 0,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 3,
+              "fga": 4,
+              "fg3m": 0,
+              "fg3a": 0,
+              "ftm": 0,
+              "fta": 0
             }
           ]
         }
@@ -598,37 +734,37 @@
   ],
   "rookieLeaders": [
     {
-      "espnId": 5041935,
-      "name": "Cameron Boozer",
+      "espnId": 5175737,
+      "name": "Yaxel Lendeborg",
       "pos": "F",
-      "team": "MEM",
-      "gp": 3,
-      "ppg": 16,
-      "rpg": 11.666666666666666,
-      "apg": 5,
-      "prapg": 32.666666666666664
+      "team": "GS",
+      "gp": 4,
+      "ppg": 21.75,
+      "rpg": 9.25,
+      "apg": 4.75,
+      "prapg": 35.75
     },
     {
       "espnId": 5095151,
       "name": "Caleb Wilson",
       "pos": "F",
       "team": "CHI",
-      "gp": 3,
-      "ppg": 22.333333333333332,
-      "rpg": 8,
-      "apg": 1.3333333333333333,
-      "prapg": 31.666666666666664
+      "gp": 4,
+      "ppg": 21,
+      "rpg": 7.25,
+      "apg": 1.75,
+      "prapg": 30
     },
     {
-      "espnId": 5175737,
-      "name": "Yaxel Lendeborg",
+      "espnId": 5041935,
+      "name": "Cameron Boozer",
       "pos": "F",
-      "team": "GS",
-      "gp": 3,
-      "ppg": 18.666666666666668,
-      "rpg": 8.333333333333334,
-      "apg": 4.333333333333333,
-      "prapg": 31.333333333333332
+      "team": "MEM",
+      "gp": 4,
+      "ppg": 14.75,
+      "rpg": 10.5,
+      "apg": 4.75,
+      "prapg": 30
     },
     {
       "espnId": 5142620,
@@ -653,48 +789,37 @@
       "prapg": 21.333333333333332
     },
     {
-      "espnId": 4698719,
-      "name": "Trevon Brazile",
-      "pos": "F",
-      "team": "DEN",
-      "gp": 2,
-      "ppg": 10.5,
-      "rpg": 10.5,
-      "apg": 0,
-      "prapg": 21
-    },
-    {
-      "espnId": 4703396,
-      "name": "Graham Ike",
-      "pos": "F",
-      "team": "GS",
-      "gp": 3,
-      "ppg": 10,
-      "rpg": 4.666666666666667,
-      "apg": 1.3333333333333333,
-      "prapg": 16
-    },
-    {
       "espnId": 5041955,
       "name": "Darryn Peterson",
       "pos": "G",
       "team": "UTAH",
-      "gp": 3,
-      "ppg": 10.666666666666666,
-      "rpg": 3.3333333333333335,
-      "apg": 2,
-      "prapg": 16
+      "gp": 4,
+      "ppg": 11.5,
+      "rpg": 4.25,
+      "apg": 2.5,
+      "prapg": 18.25
     },
     {
-      "espnId": 5082206,
-      "name": "Brayden Burries",
+      "espnId": 5041951,
+      "name": "Meleek Thomas",
       "pos": "G",
-      "team": "MIL",
+      "team": "CLE",
+      "gp": 1,
+      "ppg": 16,
+      "rpg": 2,
+      "apg": 0,
+      "prapg": 18
+    },
+    {
+      "espnId": 4698719,
+      "name": "Trevon Brazile",
+      "pos": "F",
+      "team": "DEN",
       "gp": 3,
-      "ppg": 8.333333333333334,
-      "rpg": 3.6666666666666665,
-      "apg": 1.6666666666666667,
-      "prapg": 13.666666666666666
+      "ppg": 9,
+      "rpg": 7.333333333333333,
+      "apg": 0,
+      "prapg": 16.333333333333332
     },
     {
       "espnId": 5101761,
@@ -708,6 +833,28 @@
       "prapg": 13.5
     },
     {
+      "espnId": 4703396,
+      "name": "Graham Ike",
+      "pos": "F",
+      "team": "GS",
+      "gp": 4,
+      "ppg": 8.25,
+      "rpg": 3.5,
+      "apg": 1.25,
+      "prapg": 13
+    },
+    {
+      "espnId": 5082206,
+      "name": "Brayden Burries",
+      "pos": "G",
+      "team": "MIL",
+      "gp": 4,
+      "ppg": 7.25,
+      "rpg": 3.25,
+      "apg": 1.5,
+      "prapg": 12
+    },
+    {
       "espnId": 5149115,
       "name": "Allen Graves",
       "pos": "F",
@@ -719,35 +866,13 @@
       "prapg": 11.666666666666666
     },
     {
-      "espnId": 5105555,
-      "name": "Tobe Awaka",
-      "pos": "F",
-      "team": "CHI",
-      "gp": 1,
-      "ppg": 2,
-      "rpg": 7,
-      "apg": 2,
-      "prapg": 11
-    },
-    {
-      "espnId": 5279129,
-      "name": "Sergio de Larrea",
-      "pos": "F",
-      "team": "DAL",
-      "gp": 3,
-      "ppg": 7,
-      "rpg": 2.3333333333333335,
-      "apg": 1.6666666666666667,
-      "prapg": 11
-    },
-    {
-      "espnId": 4873153,
-      "name": "Morez Johnson Jr.",
-      "pos": "F",
-      "team": "DAL",
-      "gp": 3,
-      "ppg": 6.666666666666667,
-      "rpg": 3.3333333333333335,
+      "espnId": 5174983,
+      "name": "Aday Mara",
+      "pos": "C",
+      "team": "OKC",
+      "gp": 4,
+      "ppg": 5.5,
+      "rpg": 4.5,
       "apg": 1,
       "prapg": 11
     },
@@ -761,6 +886,17 @@
       "rpg": 5,
       "apg": 0,
       "prapg": 11
+    },
+    {
+      "espnId": 5149077,
+      "name": "Kingston Flemings",
+      "pos": "G",
+      "team": "ATL",
+      "gp": 4,
+      "ppg": 3.25,
+      "rpg": 3,
+      "apg": 4.25,
+      "prapg": 10.5
     }
   ]
 }

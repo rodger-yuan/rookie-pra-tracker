@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T15:02:02.043Z",
+  "updated": "2026-10-28T15:37:42.406Z",
   "season": 2026,
   "teams": [
     {
@@ -402,9 +402,9 @@
               "blk": 2,
               "tov": 1,
               "fgm": 5,
-              "fga": 20,
+              "fga": 21,
               "fg3m": 2,
-              "fg3a": 7,
+              "fg3a": 8,
               "ftm": 2,
               "fta": 2
             },
@@ -481,6 +481,23 @@
               "fg3a": 9,
               "ftm": 2,
               "fta": 2
+            },
+            {
+              "date": "2026-10-28",
+              "opp": "SA",
+              "min": 33,
+              "pts": 19,
+              "reb": 3,
+              "ast": 5,
+              "stl": 0,
+              "blk": 0,
+              "tov": 3,
+              "fgm": 8,
+              "fga": 20,
+              "fg3m": 3,
+              "fg3a": 7,
+              "ftm": 0,
+              "fta": 0
             }
           ]
         },
@@ -521,6 +538,23 @@
               "fg3a": 6,
               "ftm": 0,
               "fta": 0
+            },
+            {
+              "date": "2026-10-27",
+              "opp": "BOS",
+              "min": 28,
+              "pts": 17,
+              "reb": 5,
+              "ast": 5,
+              "stl": 0,
+              "blk": 0,
+              "tov": 2,
+              "fgm": 5,
+              "fga": 17,
+              "fg3m": 4,
+              "fg3a": 11,
+              "ftm": 3,
+              "fta": 3
             }
           ]
         },
@@ -771,11 +805,11 @@
       "name": "Darius Acuff Jr.",
       "pos": "G",
       "team": "SAC",
-      "gp": 3,
-      "ppg": 22.333333333333332,
-      "rpg": 2.6666666666666665,
-      "apg": 4.666666666666667,
-      "prapg": 29.666666666666668
+      "gp": 4,
+      "ppg": 21.5,
+      "rpg": 2.75,
+      "apg": 4.75,
+      "prapg": 29
     },
     {
       "espnId": 5254165,
@@ -800,6 +834,17 @@
       "prapg": 18.25
     },
     {
+      "espnId": 5101761,
+      "name": "Mikel Brown Jr.",
+      "pos": "G",
+      "team": "BKN",
+      "gp": 3,
+      "ppg": 10.333333333333334,
+      "rpg": 3.3333333333333335,
+      "apg": 4.333333333333333,
+      "prapg": 18
+    },
+    {
       "espnId": 5041951,
       "name": "Meleek Thomas",
       "pos": "G",
@@ -820,17 +865,6 @@
       "rpg": 7.333333333333333,
       "apg": 0,
       "prapg": 16.333333333333332
-    },
-    {
-      "espnId": 5101761,
-      "name": "Mikel Brown Jr.",
-      "pos": "G",
-      "team": "BKN",
-      "gp": 2,
-      "ppg": 7,
-      "rpg": 2.5,
-      "apg": 4,
-      "prapg": 13.5
     },
     {
       "espnId": 4703396,
@@ -888,14 +922,14 @@
       "prapg": 11
     },
     {
-      "espnId": 5149077,
-      "name": "Kingston Flemings",
-      "pos": "G",
-      "team": "ATL",
-      "gp": 4,
-      "ppg": 3.25,
-      "rpg": 3,
-      "apg": 4.25,
+      "espnId": 5105555,
+      "name": "Tobe Awaka",
+      "pos": "F",
+      "team": "CHI",
+      "gp": 2,
+      "ppg": 3,
+      "rpg": 6.5,
+      "apg": 1,
       "prapg": 10.5
     }
   ]

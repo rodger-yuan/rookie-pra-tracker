@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T15:37:42.406Z",
+  "updated": "2026-10-29T15:43:54.660Z",
   "season": 2026,
   "teams": [
     {
@@ -77,13 +77,48 @@
               "fg3a": 5,
               "ftm": 1,
               "fta": 1
+            },
+            {
+              "date": "2026-10-29",
+              "opp": "SA",
+              "min": 26,
+              "pts": 18,
+              "reb": 5,
+              "ast": 3,
+              "stl": 1,
+              "blk": 0,
+              "tov": 2,
+              "fgm": 4,
+              "fga": 13,
+              "fg3m": 3,
+              "fg3a": 8,
+              "ftm": 7,
+              "fta": 7
             }
           ]
         },
         {
           "display": "AJ Dybantsa",
           "name": "AJ Dybantsa",
-          "games": []
+          "games": [
+            {
+              "date": "2026-10-28",
+              "opp": "CLE",
+              "min": 27,
+              "pts": 19,
+              "reb": 2,
+              "ast": 2,
+              "stl": 0,
+              "blk": 0,
+              "tov": 2,
+              "fgm": 8,
+              "fga": 12,
+              "fg3m": 1,
+              "fg3a": 3,
+              "ftm": 2,
+              "fta": 2
+            }
+          ]
         },
         {
           "display": "Yaxel Lendeborg",
@@ -156,6 +191,23 @@
               "fg3a": 8,
               "ftm": 12,
               "fta": 13
+            },
+            {
+              "date": "2026-10-29",
+              "opp": "MIN",
+              "min": 35,
+              "pts": 26,
+              "reb": 9,
+              "ast": 1,
+              "stl": 1,
+              "blk": 1,
+              "tov": 7,
+              "fgm": 11,
+              "fga": 20,
+              "fg3m": 2,
+              "fg3a": 5,
+              "ftm": 2,
+              "fta": 4
             }
           ]
         },
@@ -230,6 +282,23 @@
               "fg3a": 2,
               "ftm": 0,
               "fta": 0
+            },
+            {
+              "date": "2026-10-29",
+              "opp": "HOU",
+              "min": 17,
+              "pts": 10,
+              "reb": 6,
+              "ast": 1,
+              "stl": 1,
+              "blk": 0,
+              "tov": 2,
+              "fgm": 3,
+              "fga": 6,
+              "fg3m": 0,
+              "fg3a": 2,
+              "ftm": 4,
+              "fta": 5
             }
           ]
         },
@@ -304,6 +373,23 @@
               "fg3a": 5,
               "ftm": 2,
               "fta": 4
+            },
+            {
+              "date": "2026-10-29",
+              "opp": "NY",
+              "min": 38,
+              "pts": 20,
+              "reb": 6,
+              "ast": 4,
+              "stl": 2,
+              "blk": 1,
+              "tov": 1,
+              "fgm": 7,
+              "fga": 18,
+              "fg3m": 3,
+              "fg3a": 8,
+              "ftm": 3,
+              "fta": 4
             }
           ]
         },
@@ -344,6 +430,23 @@
               "fg3a": 2,
               "ftm": 0,
               "fta": 0
+            },
+            {
+              "date": "2026-10-29",
+              "opp": "HOU",
+              "min": 20,
+              "pts": 8,
+              "reb": 4,
+              "ast": 0,
+              "stl": 1,
+              "blk": 1,
+              "tov": 2,
+              "fgm": 2,
+              "fga": 7,
+              "fg3m": 1,
+              "fg3a": 4,
+              "ftm": 3,
+              "fta": 4
             }
           ]
         }
@@ -629,6 +732,23 @@
               "fg3a": 1,
               "ftm": 0,
               "fta": 1
+            },
+            {
+              "date": "2026-10-28",
+              "opp": "MIA",
+              "min": 28,
+              "pts": 23,
+              "reb": 5,
+              "ast": 5,
+              "stl": 1,
+              "blk": 1,
+              "tov": 2,
+              "fgm": 9,
+              "fga": 12,
+              "fg3m": 3,
+              "fg3a": 5,
+              "ftm": 2,
+              "fta": 3
             }
           ]
         },
@@ -686,6 +806,23 @@
               "fg3a": 4,
               "ftm": 6,
               "fta": 6
+            },
+            {
+              "date": "2026-10-29",
+              "opp": "LAL",
+              "min": 28,
+              "pts": 21,
+              "reb": 4,
+              "ast": 2,
+              "stl": 1,
+              "blk": 1,
+              "tov": 3,
+              "fgm": 4,
+              "fga": 15,
+              "fg3m": 3,
+              "fg3a": 8,
+              "ftm": 10,
+              "fta": 12
             }
           ]
         },
@@ -760,6 +897,23 @@
               "fg3a": 0,
               "ftm": 0,
               "fta": 0
+            },
+            {
+              "date": "2026-10-29",
+              "opp": "OKC",
+              "min": 18,
+              "pts": 10,
+              "reb": 6,
+              "ast": 3,
+              "stl": 0,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 4,
+              "fga": 6,
+              "fg3m": 0,
+              "fg3a": 0,
+              "ftm": 2,
+              "fta": 2
             }
           ]
         }
@@ -772,21 +926,21 @@
       "name": "Yaxel Lendeborg",
       "pos": "F",
       "team": "GS",
-      "gp": 4,
-      "ppg": 21.75,
-      "rpg": 9.25,
-      "apg": 4.75,
-      "prapg": 35.75
+      "gp": 5,
+      "ppg": 22.6,
+      "rpg": 9.2,
+      "apg": 4,
+      "prapg": 35.8
     },
     {
       "espnId": 5095151,
       "name": "Caleb Wilson",
       "pos": "F",
       "team": "CHI",
-      "gp": 4,
-      "ppg": 21,
-      "rpg": 7.25,
-      "apg": 1.75,
+      "gp": 5,
+      "ppg": 20.8,
+      "rpg": 7,
+      "apg": 2.2,
       "prapg": 30
     },
     {
@@ -812,26 +966,37 @@
       "prapg": 29
     },
     {
+      "espnId": 5142718,
+      "name": "AJ Dybantsa",
+      "pos": "F",
+      "team": "WSH",
+      "gp": 1,
+      "ppg": 19,
+      "rpg": 2,
+      "apg": 2,
+      "prapg": 23
+    },
+    {
       "espnId": 5254165,
       "name": "Keaton Wagler",
       "pos": "G",
       "team": "LAC",
-      "gp": 3,
-      "ppg": 13,
-      "rpg": 4.333333333333333,
-      "apg": 4,
-      "prapg": 21.333333333333332
+      "gp": 4,
+      "ppg": 15,
+      "rpg": 4.25,
+      "apg": 3.5,
+      "prapg": 22.75
     },
     {
       "espnId": 5041955,
       "name": "Darryn Peterson",
       "pos": "G",
       "team": "UTAH",
-      "gp": 4,
-      "ppg": 11.5,
-      "rpg": 4.25,
-      "apg": 2.5,
-      "prapg": 18.25
+      "gp": 5,
+      "ppg": 12.8,
+      "rpg": 4.4,
+      "apg": 2.6,
+      "prapg": 19.800000000000004
     },
     {
       "espnId": 5101761,
@@ -845,26 +1010,37 @@
       "prapg": 18
     },
     {
-      "espnId": 5041951,
-      "name": "Meleek Thomas",
-      "pos": "G",
-      "team": "CLE",
-      "gp": 1,
-      "ppg": 16,
-      "rpg": 2,
-      "apg": 0,
-      "prapg": 18
-    },
-    {
       "espnId": 4698719,
       "name": "Trevon Brazile",
       "pos": "F",
       "team": "DEN",
-      "gp": 3,
-      "ppg": 9,
-      "rpg": 7.333333333333333,
+      "gp": 4,
+      "ppg": 9.5,
+      "rpg": 7.5,
       "apg": 0,
-      "prapg": 16.333333333333332
+      "prapg": 17
+    },
+    {
+      "espnId": 5041951,
+      "name": "Meleek Thomas",
+      "pos": "G",
+      "team": "CLE",
+      "gp": 2,
+      "ppg": 13,
+      "rpg": 3,
+      "apg": 0.5,
+      "prapg": 16.5
+    },
+    {
+      "espnId": 5149077,
+      "name": "Kingston Flemings",
+      "pos": "G",
+      "team": "ATL",
+      "gp": 5,
+      "ppg": 7.2,
+      "rpg": 3.4,
+      "apg": 4.4,
+      "prapg": 15
     },
     {
       "espnId": 4703396,
@@ -882,33 +1058,22 @@
       "name": "Brayden Burries",
       "pos": "G",
       "team": "MIL",
-      "gp": 4,
-      "ppg": 7.25,
-      "rpg": 3.25,
-      "apg": 1.5,
-      "prapg": 12
+      "gp": 5,
+      "ppg": 7.8,
+      "rpg": 3.8,
+      "apg": 1.4,
+      "prapg": 13
     },
     {
-      "espnId": 5149115,
-      "name": "Allen Graves",
+      "espnId": 4873153,
+      "name": "Morez Johnson Jr.",
       "pos": "F",
-      "team": "TOR",
-      "gp": 3,
-      "ppg": 6,
-      "rpg": 4.333333333333333,
-      "apg": 1.3333333333333333,
-      "prapg": 11.666666666666666
-    },
-    {
-      "espnId": 5174983,
-      "name": "Aday Mara",
-      "pos": "C",
-      "team": "OKC",
-      "gp": 4,
-      "ppg": 5.5,
-      "rpg": 4.5,
-      "apg": 1,
-      "prapg": 11
+      "team": "DAL",
+      "gp": 5,
+      "ppg": 7.2,
+      "rpg": 3.6,
+      "apg": 1.4,
+      "prapg": 12.200000000000001
     },
     {
       "espnId": 5281370,
@@ -920,17 +1085,6 @@
       "rpg": 5,
       "apg": 0,
       "prapg": 11
-    },
-    {
-      "espnId": 5105555,
-      "name": "Tobe Awaka",
-      "pos": "F",
-      "team": "CHI",
-      "gp": 2,
-      "ppg": 3,
-      "rpg": 6.5,
-      "apg": 1,
-      "prapg": 10.5
     }
   ]
 }

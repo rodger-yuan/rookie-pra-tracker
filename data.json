@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T15:26:20.624Z",
+  "updated": "2026-10-31T14:54:36.467Z",
   "season": 2026,
   "teams": [
     {
@@ -117,6 +117,23 @@
               "fg3a": 3,
               "ftm": 2,
               "fta": 2
+            },
+            {
+              "date": "2026-10-30",
+              "opp": "CHA",
+              "min": 30,
+              "pts": 17,
+              "reb": 8,
+              "ast": 1,
+              "stl": 1,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 5,
+              "fga": 11,
+              "fg3m": 1,
+              "fg3a": 4,
+              "ftm": 6,
+              "fta": 7
             }
           ]
         },
@@ -208,6 +225,23 @@
               "fg3a": 5,
               "ftm": 2,
               "fta": 4
+            },
+            {
+              "date": "2026-10-31",
+              "opp": "LAL",
+              "min": 24,
+              "pts": 6,
+              "reb": 1,
+              "ast": 0,
+              "stl": 0,
+              "blk": 0,
+              "tov": 5,
+              "fgm": 2,
+              "fga": 3,
+              "fg3m": 1,
+              "fg3a": 2,
+              "ftm": 1,
+              "fta": 2
             }
           ]
         },
@@ -390,6 +424,23 @@
               "fg3a": 8,
               "ftm": 3,
               "fta": 4
+            },
+            {
+              "date": "2026-10-30",
+              "opp": "BOS",
+              "min": 31,
+              "pts": 23,
+              "reb": 5,
+              "ast": 4,
+              "stl": 1,
+              "blk": 2,
+              "tov": 1,
+              "fgm": 7,
+              "fga": 16,
+              "fg3m": 6,
+              "fg3a": 11,
+              "ftm": 3,
+              "fta": 6
             }
           ]
         },
@@ -692,6 +743,23 @@
               "fg3a": 11,
               "ftm": 3,
               "fta": 3
+            },
+            {
+              "date": "2026-10-30",
+              "opp": "DET",
+              "min": 23,
+              "pts": 10,
+              "reb": 0,
+              "ast": 4,
+              "stl": 1,
+              "blk": 0,
+              "tov": 2,
+              "fgm": 2,
+              "fga": 9,
+              "fg3m": 0,
+              "fg3a": 4,
+              "ftm": 6,
+              "fta": 8
             }
           ]
         },
@@ -874,6 +942,23 @@
               "fg3a": 8,
               "ftm": 10,
               "fta": 12
+            },
+            {
+              "date": "2026-10-31",
+              "opp": "MIN",
+              "min": 25,
+              "pts": 12,
+              "reb": 6,
+              "ast": 3,
+              "stl": 0,
+              "blk": 0,
+              "tov": 2,
+              "fgm": 2,
+              "fga": 11,
+              "fg3m": 1,
+              "fg3a": 5,
+              "ftm": 7,
+              "fta": 8
             }
           ]
         },
@@ -965,6 +1050,23 @@
               "fg3a": 0,
               "ftm": 2,
               "fta": 2
+            },
+            {
+              "date": "2026-10-31",
+              "opp": "HOU",
+              "min": 17,
+              "pts": 2,
+              "reb": 2,
+              "ast": 1,
+              "stl": 1,
+              "blk": 0,
+              "tov": 1,
+              "fgm": 1,
+              "fga": 4,
+              "fg3m": 0,
+              "fg3a": 1,
+              "ftm": 0,
+              "fta": 0
             }
           ]
         }
@@ -972,17 +1074,6 @@
     }
   ],
   "rookieLeaders": [
-    {
-      "espnId": 5175737,
-      "name": "Yaxel Lendeborg",
-      "pos": "F",
-      "team": "GS",
-      "gp": 5,
-      "ppg": 22.6,
-      "rpg": 9.2,
-      "apg": 4,
-      "prapg": 35.8
-    },
     {
       "espnId": 5142620,
       "name": "Darius Acuff Jr.",
@@ -1006,37 +1097,48 @@
       "prapg": 32.400000000000006
     },
     {
+      "espnId": 5175737,
+      "name": "Yaxel Lendeborg",
+      "pos": "F",
+      "team": "GS",
+      "gp": 6,
+      "ppg": 19.833333333333332,
+      "rpg": 7.833333333333333,
+      "apg": 3.3333333333333335,
+      "prapg": 30.999999999999996
+    },
+    {
       "espnId": 5095151,
       "name": "Caleb Wilson",
       "pos": "F",
       "team": "CHI",
-      "gp": 5,
-      "ppg": 20.8,
-      "rpg": 7,
-      "apg": 2.2,
-      "prapg": 30
+      "gp": 6,
+      "ppg": 21.166666666666668,
+      "rpg": 6.666666666666667,
+      "apg": 2.5,
+      "prapg": 30.333333333333336
     },
     {
       "espnId": 5142718,
       "name": "AJ Dybantsa",
       "pos": "F",
       "team": "WSH",
-      "gp": 1,
-      "ppg": 19,
-      "rpg": 2,
-      "apg": 2,
-      "prapg": 23
+      "gp": 2,
+      "ppg": 18,
+      "rpg": 5,
+      "apg": 1.5,
+      "prapg": 24.5
     },
     {
       "espnId": 5254165,
       "name": "Keaton Wagler",
       "pos": "G",
       "team": "LAC",
-      "gp": 4,
-      "ppg": 15,
-      "rpg": 4.25,
-      "apg": 3.5,
-      "prapg": 22.75
+      "gp": 5,
+      "ppg": 14.4,
+      "rpg": 4.6,
+      "apg": 3.4,
+      "prapg": 22.4
     },
     {
       "espnId": 5041955,
@@ -1054,21 +1156,10 @@
       "name": "Mikel Brown Jr.",
       "pos": "G",
       "team": "BKN",
-      "gp": 3,
-      "ppg": 10.333333333333334,
-      "rpg": 3.3333333333333335,
-      "apg": 4.333333333333333,
-      "prapg": 18
-    },
-    {
-      "espnId": 4698719,
-      "name": "Trevon Brazile",
-      "pos": "F",
-      "team": "DEN",
       "gp": 4,
-      "ppg": 9.5,
-      "rpg": 7.5,
-      "apg": 0,
+      "ppg": 10.25,
+      "rpg": 2.5,
+      "apg": 4.25,
       "prapg": 17
     },
     {
@@ -1081,6 +1172,17 @@
       "rpg": 3,
       "apg": 0.5,
       "prapg": 16.5
+    },
+    {
+      "espnId": 4698719,
+      "name": "Trevon Brazile",
+      "pos": "F",
+      "team": "DEN",
+      "gp": 5,
+      "ppg": 8.8,
+      "rpg": 6.6,
+      "apg": 0.2,
+      "prapg": 15.6
     },
     {
       "espnId": 5149077,
@@ -1120,22 +1222,22 @@
       "name": "Morez Johnson Jr.",
       "pos": "F",
       "team": "DAL",
-      "gp": 5,
-      "ppg": 7.2,
-      "rpg": 3.6,
-      "apg": 1.4,
-      "prapg": 12.200000000000001
+      "gp": 6,
+      "ppg": 6.333333333333333,
+      "rpg": 3.3333333333333335,
+      "apg": 1.3333333333333333,
+      "prapg": 11
     },
     {
-      "espnId": 5281370,
-      "name": "Hannes Steinbach",
-      "pos": "F",
-      "team": "CHA",
-      "gp": 1,
-      "ppg": 6,
-      "rpg": 5,
-      "apg": 0,
-      "prapg": 11
+      "espnId": 5174983,
+      "name": "Aday Mara",
+      "pos": "C",
+      "team": "OKC",
+      "gp": 5,
+      "ppg": 5.6,
+      "rpg": 4.2,
+      "apg": 1,
+      "prapg": 10.8
     }
   ]
 }
